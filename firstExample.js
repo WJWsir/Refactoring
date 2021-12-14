@@ -31,12 +31,12 @@ function statement(invoice, plays) {
 		volumeCredits += volumeCreditsFor(perf);
 
 		// print line for this order
-		result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+		result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
 			perf.audience
 		} seats)\n`;
 		totalAmout += amountFor(perf);
 	}
-	result += `Amount owed is ${format(totalAmout / 100)}\n`;
+	result += `Amount owed is ${usd(totalAmout / 100)}\n`;
 	result += `You earned ${volumeCredits} credits\n`;
 	return result;
 
@@ -77,7 +77,7 @@ function statement(invoice, plays) {
         return result;
     }
 
-    function format(aNumber){
+    function usd(aNumber){
         
         return new Intl.NumberFormat("en-US", {
             style: "currency",
