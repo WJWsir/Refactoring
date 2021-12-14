@@ -26,7 +26,6 @@ function statement(invoice, plays) {
 	//console.log(plays);
 	let totalAmout = 0;
 	let result = `Statement for ${invoice.customer}\n`;
-	let volumeCredits = totalVolumeCredits();
 	for (let perf of invoice.performances) {
 
 		// print line for this order
@@ -36,7 +35,7 @@ function statement(invoice, plays) {
 		totalAmout += amountFor(perf);
 	}
 	result += `Amount owed is ${usd(totalAmout / 100)}\n`;
-	result += `You earned ${volumeCredits} credits\n`;
+	result += `You earned ${totalVolumeCredits()} credits\n`;
 	return result;
 
 	function amountFor(aPerformance) {
