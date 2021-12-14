@@ -26,9 +26,8 @@ function statement(invoice, plays) {
 	//console.log(plays);
 	let totalAmout = 0;
 	let result = `Statement for ${invoice.customer}\n`;
-	let volumeCredits = 0;
+	let volumeCredits = totalVolumeCredits();
 	for (let perf of invoice.performances) {
-		volumeCredits += volumeCreditsFor(perf);
 
 		// print line for this order
 		result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
@@ -84,5 +83,14 @@ function statement(invoice, plays) {
             currency: "USD",
             minimumFractionDigits: 2,
         }).format(aNumber);
+    }
+
+    function totalVolumeCredits() {
+        let volumeCredits = 0;
+        for (let perf of invoice.performances) {
+            volumeCredits += volumeCreditsFor(perf);
+        }
+
+        return volumeCredits;
     }
 }
