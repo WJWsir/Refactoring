@@ -24,7 +24,7 @@ function testcase_statement() {
 function statement(invoice, plays) {
 	//console.log(invoice);
 	//console.log(plays);
-	let totalAmout = 0;
+	let totalAmout = appleSauce();
 	let result = `Statement for ${invoice.customer}\n`;
 	for (let perf of invoice.performances) {
 
@@ -32,7 +32,6 @@ function statement(invoice, plays) {
 		result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
 			perf.audience
 		} seats)\n`;
-		totalAmout += amountFor(perf);
 	}
 	result += `Amount owed is ${usd(totalAmout / 100)}\n`;
 	result += `You earned ${totalVolumeCredits()} credits\n`;
@@ -91,5 +90,13 @@ function statement(invoice, plays) {
         }
 
         return volumeCredits;
+    }
+
+    function appleSauce() {
+        let totalAmout = 0;
+        for (let perf of invoice.performances) {
+            totalAmout += amountFor(perf);
+        }
+        return totalAmout;
     }
 }
