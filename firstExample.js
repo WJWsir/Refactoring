@@ -24,14 +24,15 @@ function testcase_statement() {
 function statement(invoice, plays){
     const statementData = {};
     statementData.customer = invoice.customer;
-    return renderPlainText(statementData, invoice, plays);
+    statementData.performances = invoice.performances;
+    return renderPlainText(statementData, plays);
 }
 
-function renderPlainText(data, invoice, plays) {
+function renderPlainText(data, plays) {
 	//console.log(invoice);
 	//console.log(plays);
 	let result = `Statement for ${data.customer}\n`;
-	for (let perf of invoice.performances) {
+	for (let perf of data.performances) {
 
 		// print line for this order
 		result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
@@ -90,7 +91,7 @@ function renderPlainText(data, invoice, plays) {
 
     function totalVolumeCredits() {
         let result = 0;
-        for (let perf of invoice.performances) {
+        for (let perf of data.performances) {
             result += volumeCreditsFor(perf);
         }
 
@@ -99,7 +100,7 @@ function renderPlainText(data, invoice, plays) {
 
     function totalAmount() {
         let result = 0;
-        for (let perf of invoice.performances) {
+        for (let perf of data.performances) {
             result += amountFor(perf);
         }
         return result;
