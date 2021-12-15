@@ -21,7 +21,11 @@ function testcase_statement() {
 	console.log(result);
 }
 
-function statement(invoice, plays) {
+function statement(invoice, plays){
+    return renderPlainText(invoice, plays);
+}
+
+function renderPlainText(invoice, plays) {
 	//console.log(invoice);
 	//console.log(plays);
 	let result = `Statement for ${invoice.customer}\n`;
