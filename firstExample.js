@@ -22,13 +22,15 @@ function testcase_statement() {
 }
 
 function statement(invoice, plays){
-    return renderPlainText(invoice, plays);
+    const statementData = {};
+    statementData.customer = invoice.customer;
+    return renderPlainText(statementData, invoice, plays);
 }
 
-function renderPlainText(invoice, plays) {
+function renderPlainText(data, invoice, plays) {
 	//console.log(invoice);
 	//console.log(plays);
-	let result = `Statement for ${invoice.customer}\n`;
+	let result = `Statement for ${data.customer}\n`;
 	for (let perf of invoice.performances) {
 
 		// print line for this order
