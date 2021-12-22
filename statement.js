@@ -16,7 +16,7 @@ function testcase_statement() {
 	let invoiceOfBigCo = invoices.find(
 		(invoice) => invoice.customer == "BigCo"
 	);
-	let result = htmlStatement(invoiceOfBigCo, plays);
+	let result = statement(invoiceOfBigCo, plays);
 	console.log(result);
 }
 
