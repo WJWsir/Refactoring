@@ -13,7 +13,7 @@ function createStatementData(invoice, plays){
 		const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance));
         const result = Object.assign({}, aPerformance);
         result.play = calculator.Play;
-        result.amount = amountFor(result);
+        result.amount = calculator.amount;
         result.volumeCredits = volumeCreditsFor(result);
         return result;
     }
@@ -22,10 +22,6 @@ function createStatementData(invoice, plays){
 
         return plays[perf.playID];
     }
-
-	function amountFor(aPerformance) {
-		return new PerformanceCalculator(aPerformance, playFor(aPerformance)).amount;
-	}
 
     function volumeCreditsFor(aPerformance){
         let result = 0;
@@ -55,7 +51,7 @@ class PerformanceCalculator {
 	get amount() {
 		let result = 0;
 
-		switch (this.Performance.play.type) {
+		switch (this.Play.type) {
 			case "tragedy":
 				result = 40000;
 				if (this.Performance.audience > 30) {
