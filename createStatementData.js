@@ -49,12 +49,7 @@ class PerformanceCalculator {
 			case "tragedy":
 				throw 'bad thing';
 			case "comedy":
-				result = 30000;
-				if (this.Performance.audience > 20) {
-					result += 10000 + 500 * (this.Performance.audience - 20);
-				}
-				result += 300 * this.Performance.audience;
-				break;
+				throw 'bad thing';
 			default:
 				throw new Error(`unknown type: ${this.Play.type}`);
 		}
@@ -91,5 +86,12 @@ class TragedyCalculator extends PerformanceCalculator {
 }
 
 class ComedyCalculator extends PerformanceCalculator {
-
+	get amount() {
+		let result = 30000;
+		if (this.Performance.audience > 20) {
+			result += 10000 + 500 * (this.Performance.audience - 20);
+		}
+		result += 300 * this.Performance.audience;
+		return result;
+	}
 }
