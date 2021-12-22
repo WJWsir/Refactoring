@@ -43,25 +43,12 @@ class PerformanceCalculator {
 	}
 
 	get amount() {
-		let result = 0;
-
-		switch (this.Play.type) {
-			case "tragedy":
-				throw 'bad thing';
-			case "comedy":
-				throw 'bad thing';
-			default:
-				throw new Error(`unknown type: ${this.Play.type}`);
-		}
-
-		return result;
+		throw new Error("subClass responsibility");
     }
 
     get volumeCredits(){
         let result = 0;
 		result += Math.max(this.Performance.audience - 30, 0);
-		if ("comedy" == this.Play.type)
-			result += Math.floor(this.Performance.audience / 5);
         return result;
     }
 }
@@ -93,5 +80,9 @@ class ComedyCalculator extends PerformanceCalculator {
 		}
 		result += 300 * this.Performance.audience;
 		return result;
+	}
+
+	get volumeCredits() {
+		return super.volumeCredits + Math.floor(this.Performance.audience / 5);
 	}
 }
